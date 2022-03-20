@@ -1,0 +1,25 @@
+{
+  "name": "tree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./bin/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "tree": "./src/index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "commander": "^9.0.0",
+    "configstore": "^6.0.0",
+    "inquirer": "^8.2.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "standard": "^16.0.4"
+  }
+}
