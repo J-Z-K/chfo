@@ -21,6 +21,10 @@
     "nodemon": "^2.0.15"
   },
   "devDependencies": {
-    "standard": "^16.0.4"
+    "eslint": "*",
+    "eslint-config-standard": "*",
+    "eslint-plugin-import": "*",
+    "eslint-plugin-node": "*",
+    "eslint-plugin-promise": "*"
   }
 }

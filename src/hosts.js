@@ -1,6 +1,5 @@
 import * as fs from 'fs/promises'
 const hostsFile = '/etc/hosts_test'
-const sitesToBlock = ['reddit.com', 'netfix.com']
 
 const checkFile = async () => {
   try {
@@ -22,15 +21,5 @@ export const restoreTempFile = async () => {
 
 export const blockSites = async (sites) => {
   await checkFile()
-  sites.map((site) => {
-    fs.appendFile(hostsFile, `\n127.0.0.1 ${site}`)
-  })
+  sites.map((site) => fs.appendFile(hostsFile, `\n127.0.0.1 ${site}`))
 }
-
-// export const unblockSites = async () => {
-//   checkFile()
-//   console.log(global.fileSize)
-//   if (global.fileSize) {
-//     fs.truncate(hostsFile, global.fileSize)
-//   }
-// }

@@ -11,7 +11,6 @@ const config = new Configstore('tree')
 
 initInquirer()
 
-
 // blockSites(sitesToBlock)
 // setTimeout(unblockSites, 1000)
 

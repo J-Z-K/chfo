@@ -45,13 +45,14 @@ const addBlockedHostnames = () => {
     {
       name: 'confirm',
       type: 'confirm',
-      message: `does it look ok? ${chalk.blue('\nexample.com\nfacebook.com')}\n`
+      message: ({ hosts }) => `does it look ok? \n${chalk.blue(hosts.replace(/ /g, '\n'))}\n`
     }
   ]).then(answers => {
-    if (!answers.confirm) 
+    if (!answers.confirm) {
       addBlockedHostnames()
-    else
+    } else {
       blockSites(answers.hosts.split(' '))
-      initInquirer()
+    }
+    initInquirer()
   })
 }
