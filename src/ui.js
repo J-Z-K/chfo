@@ -1,5 +1,6 @@
 import inquirer from 'inquirer'
 import chalk from 'chalk'
+import { blockSites } from './hosts.js'
 
 export const initInquirer = () => {
   inquirer.prompt([
@@ -44,9 +45,14 @@ const addBlockedHostnames = () => {
     {
       name: 'confirm',
       type: 'confirm',
-      message: `does it look ok? ${chalk.blue('\nexample.com\nfacebook.com')}\n`
+      message: ({ hosts }) => `does it look ok? \n${chalk.blue(hosts.replace(/ /g, '\n'))}\n`
     }
   ]).then(answers => {
-    if (!answers.confirm) addBlockedHostnames()
+    if (!answers.confirm) {
+      addBlockedHostnames()
+    } else {
+      blockSites(answers.hosts.split(' '))
+    }
+    initInquirer()
   })
 }
