@@ -1,6 +1,7 @@
-import inquirer from 'inquirer'
 import chalk from 'chalk'
+import inquirer from 'inquirer'
 import { blockSites } from './hosts.js'
+import { getBlockedSites, setBlockedSites, removeFromBlockedSites } from './storage.js'
 
 export const initInquirer = () => {
   inquirer.prompt([
@@ -26,8 +27,8 @@ const hostnamesConfig = () => {
       message: 'What you want to do?:',
       choices: [
         { name: 'Add blocked hostnames', value: addBlockedHostnames },
-        { name: 'Show blocked hosts', value: () => '' },
-        { name: 'Remove blocked hosts', value: () => '' }
+        { name: 'Show blocked hosts', value: showBlockedHostnames },
+        { name: 'Remove blocked hosts', value: removeBlockedHostnames }
       ]
     }
   ]).then(answers => {
@@ -51,8 +52,40 @@ const addBlockedHostnames = () => {
     if (!answers.confirm) {
       addBlockedHostnames()
     } else {
-      blockSites(answers.hosts.split(' '))
+      try {
+        setBlockedSites(answers.hosts)
+      } catch (error) {
+        console.log(error)
+      }
     }
     initInquirer()
   })
+}
+
+const showBlockedHostnames = () => {
+  console.log(getBlockedSites())
+  initInquirer()
+}
+
+const removeBlockedHostnames = () => {
+  try {
+    inquirer.prompt([
+      {
+        type: 'checkbox',
+        name: 'hosts',
+        message: 'what kind of hosts do you want to delete',
+        choices: getBlockedSites()
+      }
+    ]).then(answers => {
+      try {
+        console.log(answers.hosts)
+        removeFromBlockedSites(answers.hosts)
+        initInquirer()
+      } catch (error) {
+        console.log(error)
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }

@@ -10,13 +10,12 @@
   "author": "",
   "license": "ISC",
   "bin": {
-    "tree": "./src/index.js"
+    "tree": "src/index.js"
   },
   "dependencies": {
     "chalk": "^5.0.1",
     "commander": "^9.0.0",
     "configstore": "^6.0.0",
-    "g": "^2.0.1",
     "inquirer": "^8.2.1",
     "nodemon": "^2.0.15"
   },
@@ -26,5 +25,14 @@
     "eslint-plugin-import": "*",
     "eslint-plugin-node": "*",
     "eslint-plugin-promise": "*"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/J-Z-K/chfo.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/J-Z-K/chfo/issues"
+  },
+  "homepage": "https://github.com/J-Z-K/chfo#readme"
 }

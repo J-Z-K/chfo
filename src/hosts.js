@@ -1,4 +1,5 @@
 import * as fs from 'fs/promises'
+import { storage } from './storage.js'
 const hostsFile = '/etc/hosts_test'
 
 const checkFile = async () => {
@@ -19,7 +20,9 @@ export const restoreTempFile = async () => {
   fs.rename(`${hostsFile}_temp`, hostsFile)
 }
 
-export const blockSites = async (sites) => {
+export const blockSites = async (sitesToBlock) => {
+  const toStorage = [...sitesToBlock]
+  storage.set('blockedSites', toStorage)
   await checkFile()
-  sites.map((site) => fs.appendFile(hostsFile, `\n127.0.0.1 ${site}`))
+  sitesToBlock.map((site) => fs.appendFile(hostsFile, `\n127.0.0.2 ${site}`))
 }
